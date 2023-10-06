@@ -5,7 +5,7 @@
 <title>UserRepository (App Starter (1.0.0))</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: edu.cnm.deepdive.appstarter.service, class: UserRepository">
+<meta name="description" content="declaration: package: edu.cnm.deepdive.tetris.service, class: UserRepository">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -67,19 +67,19 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">edu.cnm.deepdive.appstarter.service</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">edu.cnm.deepdive.tetris.service</a></div>
 <h1 title="Class UserRepository" class="title">Class UserRepository</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">edu.cnm.deepdive.appstarter.service.UserRepository</div>
+<div class="inheritance">edu.cnm.deepdive.tetris.service.UserRepository</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="annotations">@Singleton
 </span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-39">UserRepository</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Provides high-level operations on a repository of <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> instances, backed by a SQLite
- database, in turn accessed via <a href="LocalDatabase.html" title="class in edu.cnm.deepdive.appstarter.service"><code>LocalDatabase</code></a>. This class has no mutable state, and its
+<div class="block">Provides high-level operations on a repository of <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> instances, backed by a SQLite
+ database, in turn accessed via <a href="LocalDatabase.html" title="class in edu.cnm.deepdive.tetris.service"><code>LocalDatabase</code></a>. This class has no mutable state, and its
  methods are thread-safe; however, mutating operations (involving <code>INSERT</code>, <code>UPDATE</code>,
  or <code>DELETE</code> on the underlying database) attempted simultaneously could block or fail.</div>
 </section>
@@ -97,35 +97,35 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Completable</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(edu.cnm.deepdive.appstarter.model.entity.User)" class="member-name-link">delete</a><wbr>(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&nbsp;user)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(edu.cnm.deepdive.appstarter.model.entity.User)" class="member-name-link">delete</a><wbr>(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&nbsp;user)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Constructs and returns a <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Completable</code></a> task that, when executed (subscribed to), will
  remove the specified <code>user</code> from the database, if present, and invoke the subscribing
  <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/functions/Action.html" title="class or interface in io.reactivex.rxjava3.functions" class="external-link"><code>Action</code></a> on completion.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(long)" class="member-name-link">get</a><wbr>(long&nbsp;id)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a <a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query for the <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> entity instance identified by
+<div class="block">Returns a <a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query for the <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> entity instance identified by
  <code>id</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&gt;&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&gt;&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAll()" class="member-name-link">getAll</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a <a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query of all <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> entity instances.</div>
+<div class="block">Returns a <a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query of all <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> entity instances.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCurrent()" class="member-name-link">getCurrent</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Constructs and returns a <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Single</code></a> that, when executed (subscribed to), retrieves the
- <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> instance for the current signed-in user from the database, and passes it to the
+ <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> instance for the current signed-in user from the database, and passes it to the
  subscribing <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/functions/Consumer.html" title="class or interface in io.reactivex.rxjava3.functions" class="external-link"><code>Consumer</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#save(edu.cnm.deepdive.appstarter.model.entity.User)" class="member-name-link">save</a><wbr>(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&nbsp;user)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#save(edu.cnm.deepdive.appstarter.model.entity.User)" class="member-name-link">save</a><wbr>(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&nbsp;user)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Constructs and returns a <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Single</code></a> task that, when executed (subscribed to), will insert
- or update the specified <code>user</code> in the database, and pass the updated <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a>
+ or update the specified <code>user</code> in the database, and pass the updated <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a>
  instance to the subscribing <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/functions/Consumer.html" title="class or interface in io.reactivex.rxjava3.functions" class="external-link"><code>Consumer</code></a>.</div>
 </div>
 </div>
@@ -148,32 +148,32 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getCurrent()">
 <h3>getCurrent</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-61">getCurrent</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-61">getCurrent</a></span>()</div>
 <div class="block">Constructs and returns a <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Single</code></a> that, when executed (subscribed to), retrieves the
- <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> instance for the current signed-in user from the database, and passes it to the
+ <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> instance for the current signed-in user from the database, and passes it to the
  subscribing <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/functions/Consumer.html" title="class or interface in io.reactivex.rxjava3.functions" class="external-link"><code>Consumer</code></a>.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="get(long)">
 <h3>get</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-73">get</a></span><wbr><span class="parameters">(long&nbsp;id)</span></div>
-<div class="block">Returns a <a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query for the <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> entity instance identified by
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-73">get</a></span><wbr><span class="parameters">(long&nbsp;id)</span></div>
+<div class="block">Returns a <a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query for the <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> entity instance identified by
  <code>id</code>. The query executes when observed, or (if already being observed) whenever the
  contents of the underlying <code>user</code> table are modified using Room data-access methods.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>id</code> - Unique identifier (primary key value) of a <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> entity instance.</dd>
+<dd><code>id</code> - Unique identifier (primary key value) of a <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> entity instance.</dd>
 <dt>Returns:</dt>
-<dd><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query for the <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> identified by <code>id</code>.</dd>
+<dd><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query for the <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> identified by <code>id</code>.</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getAll()">
 <h3>getAll</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-82">getAll</a></span>()</div>
-<div class="block">Returns a <a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query of all <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> entity instances. The query executes
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link">LiveData</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-82">getAll</a></span>()</div>
+<div class="block">Returns a <a href="https://developer.android.com/reference/androidx/lifecycle/LiveData.html" title="class or interface in androidx.lifecycle" class="external-link"><code>LiveData</code></a>-based query of all <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> entity instances. The query executes
  when observed, or (if already being observed) whenever the contents of the underlying
  <code>user</code> table are modified using Room data-access methods.</div>
 </section>
@@ -181,9 +181,9 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="save(edu.cnm.deepdive.appstarter.model.entity.User)">
 <h3>save</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-100">save</a></span><wbr><span class="parameters">(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&nbsp;user)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Single</a>&lt;<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-100">save</a></span><wbr><span class="parameters">(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&nbsp;user)</span></div>
 <div class="block">Constructs and returns a <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Single</code></a> task that, when executed (subscribed to), will insert
- or update the specified <code>user</code> in the database, and pass the updated <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a>
+ or update the specified <code>user</code> in the database, and pass the updated <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a>
  instance to the subscribing <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/functions/Consumer.html" title="class or interface in io.reactivex.rxjava3.functions" class="external-link"><code>Consumer</code></a>. The specific
  persistence operation is determined by examining the value returned by <a href="../model/entity/User.html#getId()"><code>User.getId()</code></a>: a
  value of zero (0) indicates the <code>user</code> has not yet been <code>INSERT</code>ed and must be; a
@@ -191,7 +191,7 @@ loadScripts(document, 'script');</script>
  <code>UPDATE</code>d.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>user</code> - Instance of <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> entity class to be persisted (inserted or updated) in the
+<dd><code>user</code> - Instance of <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> entity class to be persisted (inserted or updated) in the
              database.</dd>
 <dt>Returns:</dt>
 <dd><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Single.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Single</code></a> task that will persist <code>user</code> to the database when executed
@@ -202,7 +202,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="delete(edu.cnm.deepdive.appstarter.model.entity.User)">
 <h3>delete</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Completable</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-127">delete</a></span><wbr><span class="parameters">(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity">User</a>&nbsp;user)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link">Completable</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/edu/cnm/deepdive/appstarter/service/UserRepository.html#line-127">delete</a></span><wbr><span class="parameters">(<a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity">User</a>&nbsp;user)</span></div>
 <div class="block">Constructs and returns a <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Completable</code></a> task that, when executed (subscribed to), will
  remove the specified <code>user</code> from the database, if present, and invoke the subscribing
  <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/functions/Action.html" title="class or interface in io.reactivex.rxjava3.functions" class="external-link"><code>Action</code></a> on completion. Whether the deletion is even
@@ -210,14 +210,14 @@ loadScripts(document, 'script');</script>
  zero (0) indicates the <code>user</code> has not been inserted into the database, and thus need not
  be deleted; a non-zero value indicates that <code>user</code> is in the database and must be
  <code>DELETE</code>d.
- <p>If an attempt is made to delete the <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> entity instance corresponding to the
+ <p>If an attempt is made to delete the <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> entity instance corresponding to the
  current signed-in user, the <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Completable</code></a> will fail, with an
  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link"><code>IllegalStateException</code></a> passed to the
  <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/functions/Consumer.html" title="class or interface in io.reactivex.rxjava3.functions" class="external-link"><code>Consumer&lt;Throwable&gt;</code></a> specified in
  <a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html#subscribe-io.reactivex.rxjava3.functions.Action-io.reactivex.rxjava3.functions.Consumer-io.reactivex.rxjava3.disposables.DisposableContainer-" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Completable.subscribe(Action, Consumer, DisposableContainer)</code></a>.</p></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>user</code> - Instance of <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.appstarter.model.entity"><code>User</code></a> entity class to be deleted from the database.</dd>
+<dd><code>user</code> - Instance of <a href="../model/entity/User.html" title="class in edu.cnm.deepdive.tetris.model.entity"><code>User</code></a> entity class to be deleted from the database.</dd>
 <dt>Returns:</dt>
 <dd><a href="https://reactivex.io/RxJava/3.x/javadoc/io/reactivex/rxjava3/core/Completable.html" title="class or interface in io.reactivex.rxjava3.core" class="external-link"><code>Completable</code></a> task that will delete <code>user</code> from the database when executed
  (subscribed to).</dd>
