@@ -16,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 public class PlayingFieldViewModel extends ViewModel implements DefaultLifecycleObserver {
   private final PlayingFieldRepository playingFieldRepository;
   private final PreferencesRepository preferencesRepository;
-  private final MutableLiveData<Field> playingField;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
 
@@ -25,18 +24,41 @@ public class PlayingFieldViewModel extends ViewModel implements DefaultLifecycle
       PreferencesRepository preferencesRepository) {
     this.playingFieldRepository = playingFieldRepository;
     this.preferencesRepository = preferencesRepository;
-    playingField = new MutableLiveData<>();
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
 
   }
 
   public LiveData<Field> getPlayingField() {
-    return playingField;
+    return playingFieldRepository.getPlayingField();
   }
 
   public LiveData<Throwable> getThrowable() {
     return throwable;
+  }
+  public void create() {
+    // TODO: 10/6/23 Invoke create in Repository with settings repository.
+  }
+  public void start(){
+    // TODO: 10/6/23 Invoke start in repository......
+  }
+
+  public void moveLeft() {
+    // TODO: 10/6/23 Invoke Moveleft in repository........
+
+  }
+  public void moveRight() {
+
+
+  }
+  public void rotateRight(){
+
+  }
+  public void rotateLeft() {
+
+  }
+  public void drop() {
+
   }
 
   @Override
