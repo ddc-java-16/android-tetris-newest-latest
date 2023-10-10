@@ -34,17 +34,18 @@ import kotlin.jvm.functions.Function1;
  * (such as {@link SettingsActivity.SettingsFragment}).
  */
 @Singleton
-public class PreferencesRepository implements OnSharedPreferenceChangeListener {
+public class PreferencesRepository {
 
   private final MutableLiveData<SharedPreferences> preferences;
+  private final SharedPreferences prefs;
 
   @Inject
   PreferencesRepository(@ApplicationContext Context context) {
-    SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-    preferences = new MutableLiveData<>(sharedPrefs);
-    PreferenceManager
-        .getDefaultSharedPreferences(context)
-        .registerOnSharedPreferenceChangeListener(this);
+    prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    preferences = new MutableLiveData<>(prefs);
+  prefs.registerOnSharedPreferenceChangeListener(
+      (prefs, key) -> preferences.postValue(prefs)
+  );
   }
 
   /**
@@ -58,9 +59,9 @@ public class PreferencesRepository implements OnSharedPreferenceChangeListener {
     return preferences;
   }
 
-  @Override
-  public void onSharedPreferenceChanged(SharedPreferences preferences, String ignoredKey) {
-    this.preferences.postValue(preferences);
+
+  public void registerPreferencesChangedListener(OnSharedPreferenceChangeListener listener) {
+prefs.registerOnSharedPreferenceChangeListener((listener));
   }
 
 }

@@ -26,8 +26,8 @@ public class PlayingFieldRepository {
   private final MutableLiveData<Dealer> dealer;
   private final Scheduler scheduler;
   @Inject
-    PlayingFieldRepository (@ApplicationContext Context context) {
- this.rng = new SecureRandom();
+    PlayingFieldRepository (@ApplicationContext Context context, Random rng) {
+ this.rng = rng;
     playingField = new MutableLiveData<>();
     dealer= new MutableLiveData<>();
     scheduler = Schedulers.single();

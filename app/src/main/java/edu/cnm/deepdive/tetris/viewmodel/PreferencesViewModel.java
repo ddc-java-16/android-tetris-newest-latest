@@ -40,7 +40,7 @@ import kotlin.jvm.functions.Function1;
  */
 @HiltViewModel
 public class PreferencesViewModel extends ViewModel implements DefaultLifecycleObserver {
-
+  private final LiveData<Integer> playingFieldWidthPreference;
   private final LiveData<Boolean> selectableTextPreference;
 
   // TODO Declare additional LiveData fields for individual preferences as necessary.
@@ -49,6 +49,7 @@ public class PreferencesViewModel extends ViewModel implements DefaultLifecycleO
   PreferencesViewModel(@ApplicationContext Context context, PreferencesRepository repository) {
     LiveData<SharedPreferences> prefs = repository.getPreferences();
     selectableTextPreference = selectableTextPreferenceLiveData(context, prefs);
+    playingFieldWidthPreference = playingFieldWidthPrefLiveData(context, prefs);
     // TODO Initialize additional LiveData fields (as needed) for other individual preferences.
   }
 
@@ -58,6 +59,11 @@ public class PreferencesViewModel extends ViewModel implements DefaultLifecycleO
    */
   public LiveData<Boolean> getSelectableTextPreference() {
     return selectableTextPreference;
+  }
+
+
+  public LiveData<Integer> getPlayingFieldWidthPreference() {
+    return playingFieldWidthPreference;
   }
 
   private LiveData<Boolean> selectableTextPreferenceLiveData(Context context,
@@ -70,6 +76,11 @@ public class PreferencesViewModel extends ViewModel implements DefaultLifecycleO
         (prefs) -> prefs.getBoolean(selectableTextPrefKey, selectableTextPrefDefault));
   }
 
+  private LiveData<Integer> playingFieldWidthPrefLiveData(Context context, LiveData<SharedPreferences> preferences) {
+    String playingFieldWidthPrefKey = context.getString(R.string.playing_field_width_key);
+    int playingFieldWidthPrefDefault = context.getResources().getInteger(R.integer.playing_field_width_default);
+    return Transformations.map((preferences), (prefs) -> prefs.getInt(playingFieldWidthPrefKey, playingFieldWidthPrefDefault));
+  }
   // TODO Following the example of the selectableTextPreferenceLiveData method, define additional
   //  methods (as needed) to initialize LiveData fields for other individual preferences.
 

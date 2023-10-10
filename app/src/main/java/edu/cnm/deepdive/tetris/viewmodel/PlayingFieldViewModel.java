@@ -1,13 +1,16 @@
 package edu.cnm.deepdive.tetris.viewmodel;
 
 import android.content.Context;
+import android.content.res.Resources;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.preference.PreferenceManager;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dagger.hilt.android.qualifiers.ApplicationContext;
+import edu.cnm.deepdive.tetris.R;
 import edu.cnm.deepdive.tetris.model.Dealer;
 import edu.cnm.deepdive.tetris.model.Field;
 import edu.cnm.deepdive.tetris.service.PlayingFieldRepository;
@@ -19,21 +22,40 @@ import javax.inject.Inject;
 import org.jetbrains.annotations.NotNull;
 
 @HiltViewModel
+
 public class PlayingFieldViewModel extends ViewModel implements DefaultLifecycleObserver {
+  private final Context context;
+  private final Resources resources;
+
   private final PlayingFieldRepository playingFieldRepository;
   private final PreferencesRepository preferencesRepository;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
-
+  private int playingFieldWidth;
+  private final String playingFieldWidthKey;
+  private final  int playingFieldWidthDefault;
   @Inject
 
   PlayingFieldViewModel(@ApplicationContext Context context,
       PlayingFieldRepository playingFieldRepository,
       PreferencesRepository preferencesRepository) {
+    this.context = context;
+    resources = context.getResources();
     this.playingFieldRepository = playingFieldRepository;
     this.preferencesRepository = preferencesRepository;
+
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
+    playingFieldWidthDefault = resources.getInteger(R.integer.playing_field_width_default);
+    playingFieldWidthKey = resources.getString(R.string.playing_field_width_key);
+    playingFieldWidth = playingFieldWidthDefault;
+    preferencesRepository.registerPreferencesChangedListener((prefs, key) -> {
+      if( key.equals(playingFieldWidthKey) ) {
+        playingFieldWidth = prefs.getInt(playingFieldWidthKey, playingFieldWidthDefault);
+        // TODO check if playing field good idea
+      }
+    });
+
     create();
 
   }
@@ -49,7 +71,10 @@ public class PlayingFieldViewModel extends ViewModel implements DefaultLifecycle
     return throwable;
   }
   public void create() {
-   Disposable disposable =playingFieldRepository.create(25, 10, 5, 5 ) // FIXME
+    int width = PreferenceManager.getDefaultSharedPreferences(context)
+        .getInt(context.getString(R.string.playing_field_width_key),  resources.getInteger(R.integer.playing_field_width_default));
+   ;
+   Disposable disposable =playingFieldRepository.create(25, width, 5, 5 )
     .subscribe(() -> {
         },
         throwable::postValue
