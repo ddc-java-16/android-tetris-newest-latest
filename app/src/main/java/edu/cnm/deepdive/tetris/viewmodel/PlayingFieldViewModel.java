@@ -24,14 +24,11 @@ import org.jetbrains.annotations.NotNull;
 @HiltViewModel
 
 public class PlayingFieldViewModel extends ViewModel implements DefaultLifecycleObserver {
-  private final Context context;
-  private final Resources resources;
 
   private final PlayingFieldRepository playingFieldRepository;
   private final PreferencesRepository preferencesRepository;
   private final MutableLiveData<Throwable> throwable;
   private final CompositeDisposable pending;
-  private int playingFieldWidth;
   private final String playingFieldWidthKey;
   private final  int playingFieldWidthDefault;
   @Inject
@@ -39,22 +36,14 @@ public class PlayingFieldViewModel extends ViewModel implements DefaultLifecycle
   PlayingFieldViewModel(@ApplicationContext Context context,
       PlayingFieldRepository playingFieldRepository,
       PreferencesRepository preferencesRepository) {
-    this.context = context;
-    resources = context.getResources();
     this.playingFieldRepository = playingFieldRepository;
     this.preferencesRepository = preferencesRepository;
 
     throwable = new MutableLiveData<>();
     pending = new CompositeDisposable();
+    Resources resources = context.getResources();
     playingFieldWidthDefault = resources.getInteger(R.integer.playing_field_width_default);
     playingFieldWidthKey = resources.getString(R.string.playing_field_width_key);
-    playingFieldWidth = playingFieldWidthDefault;
-    preferencesRepository.registerPreferencesChangedListener((prefs, key) -> {
-      if( key.equals(playingFieldWidthKey) ) {
-        playingFieldWidth = prefs.getInt(playingFieldWidthKey, playingFieldWidthDefault);
-        // TODO check if playing field good idea
-      }
-    });
 
     create();
 
@@ -71,9 +60,7 @@ public class PlayingFieldViewModel extends ViewModel implements DefaultLifecycle
     return throwable;
   }
   public void create() {
-    int width = PreferenceManager.getDefaultSharedPreferences(context)
-        .getInt(context.getString(R.string.playing_field_width_key),  resources.getInteger(R.integer.playing_field_width_default));
-   ;
+    int width = preferencesRepository.get(playingFieldWidthKey, playingFieldWidthDefault);
    Disposable disposable =playingFieldRepository.create(25, width, 5, 5 )
     .subscribe(() -> {
         },
