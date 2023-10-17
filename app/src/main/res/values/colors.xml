@@ -23,5 +23,13 @@
   <color name="save">@color/primary_color_dark</color>
   <color name="cancel">#FFFF0000</color>
   <color name="disabled">#60000000</color>
-
+  <color name="l_shape">#FF9800</color>
+  <color name="j_shape">#2196F3</color>
+  <color name="s_shape">#4CAF50</color>
+  <color name="o_shape">#FFEB3B</color>
+  <color name="i_shape">#07FFF6</color>
+  <color name="z_shape">#F44336</color>
+  <color name="t_shape">#9C27B0</color>
+  <color name="black_outline">#000000</color>
+  <color name="null_shape">#00000000</color>
 </resources>
