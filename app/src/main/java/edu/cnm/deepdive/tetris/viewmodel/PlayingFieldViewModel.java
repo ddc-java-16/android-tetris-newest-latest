@@ -76,7 +76,7 @@ moveSuccess =new MutableLiveData<>();
   }
 
 
-  public void moveLeft() {
+  public void moveLeft() { 
     move(playingFieldRepository.moveLeft());
 
   }

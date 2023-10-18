@@ -41,8 +41,8 @@ private FragmentGameBinding binding;
     var playingFieldViewModel = new ViewModelProvider(requireActivity())
         .get(PlayingFieldViewModel.class);
     playingFieldViewModel.getPlayingField()
-        .observe(getViewLifecycleOwner(), (playingField) -> {
-          binding.playingField.setPlayingField(playingField);
-        });
+        .observe(getViewLifecycleOwner(), (playingField) ->
+          binding.playingField.post(() -> binding.playingField.setPlayingField(playingField)));
+        }
+
   }
-}
