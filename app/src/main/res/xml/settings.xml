@@ -25,7 +25,7 @@
     android:summaryOff="@string/selectable_text_pref_summary_off"
     android:defaultValue="@bool/selectable_text_pref_default"/>
 
-  <SeekBarPreferences
+  <SeekBarPreference
     android:key = "@string/playing_field_width_key"
     android:title = "@string/playing_field_width_title"
     app:min="@integer/playing_field_width_min"

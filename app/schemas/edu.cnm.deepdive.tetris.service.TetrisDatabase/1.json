@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "cae2d95a3133aa4e563a8cc12880e771",
+    "identityHash": "52c425b7ed995d799963632b4fd3221e",
     "entities": [
       {
         "tableName": "user",
@@ -63,7 +63,7 @@
       },
       {
         "tableName": "score",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`score_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created` INTEGER NOT NULL, `started` INTEGER NOT NULL, `duration` INTEGER NOT NULL, `value` INTEGER NOT NULL, `rowsRemoved` INTEGER NOT NULL, `player_id` INTEGER NOT NULL, FOREIGN KEY(`player_id`) REFERENCES `user`(`user_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`score_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created` INTEGER NOT NULL, `started` INTEGER NOT NULL, `duration` INTEGER NOT NULL, `value` INTEGER NOT NULL, `rows_removed` INTEGER NOT NULL, `player_id` INTEGER NOT NULL, FOREIGN KEY(`player_id`) REFERENCES `user`(`user_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -97,7 +97,7 @@
           },
           {
             "fieldPath": "rowsRemoved",
-            "columnName": "rowsRemoved",
+            "columnName": "rows_removed",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -115,6 +115,15 @@
           ]
         },
         "indices": [
+          {
+            "name": "index_score_value",
+            "unique": false,
+            "columnNames": [
+              "value"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_score_value` ON `${TABLE_NAME}` (`value`)"
+          },
           {
             "name": "index_score_player_id",
             "unique": false,
@@ -140,10 +149,15 @@
         ]
       }
     ],
-    "views": [],
+    "views": [
+      {
+        "viewName": "user_score",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT s.player_id, u.display_name, s.value, s.rows_removed, s.created  FROM user AS u JOIN score AS s ON u.user_id = s.player_id ORDER BY value DESC"
+      }
+    ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cae2d95a3133aa4e563a8cc12880e771')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '52c425b7ed995d799963632b4fd3221e')"
     ]
   }
 }

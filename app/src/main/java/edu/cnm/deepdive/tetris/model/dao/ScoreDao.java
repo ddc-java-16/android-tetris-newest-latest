@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import edu.cnm.deepdive.tetris.model.entity.Score;
+import edu.cnm.deepdive.tetris.model.entity.pojo.UserScore;
 import io.reactivex.rxjava3.core.Single;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public interface ScoreDao {
   @Query("SELECT * FROM score WHERE player_id = :playerId ORDER BY value DESC")
   LiveData<List<Score>> selectByPlayerId(long playerId);
 
-  //TODO add quert to reterereiveiveeeevevieve
+@Query("SELECT * FROM user_score ORDER BY value DESC")
+LiveData<List<UserScore>> selectUserScores();
+
 
 }

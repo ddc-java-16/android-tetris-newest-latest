@@ -25,9 +25,11 @@ public class Score {
   private Instant started = Instant.MIN;
 
   private long duration;
+
+  @ColumnInfo(index = true)
   private long value;
 
-  @ColumnInfo
+  @ColumnInfo(name = "rows_removed")
   private int rowsRemoved;
 
   @ColumnInfo(name = "player_id", index = true)

@@ -30,7 +30,7 @@ private FragmentGameBinding binding;
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentGameBinding.inflate(inflater, container, false);
-    binding.goToScores.setOnClickListener((v) -> Navigation.findNavController(binding.getRoot()).navigate(GameFragmentDirections.navigateToScores(100)));
+
     return binding.getRoot();
   }
 

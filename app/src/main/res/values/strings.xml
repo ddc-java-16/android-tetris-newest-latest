@@ -46,5 +46,6 @@
   <string name="game_fragment_label"/>
   <string name="scores_fragment_label">scores</string>
   <string name="game_label">game\n</string>
+  <string name="move_left">Move Left</string>
 
 </resources>

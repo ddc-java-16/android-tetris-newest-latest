@@ -3,6 +3,7 @@ package edu.cnm.deepdive.tetris.service;
 import androidx.lifecycle.LiveData;
 import edu.cnm.deepdive.tetris.model.dao.ScoreDao;
 import edu.cnm.deepdive.tetris.model.entity.Score;
+import edu.cnm.deepdive.tetris.model.entity.pojo.UserScore;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -31,5 +32,8 @@ public LiveData<Score> read(long id) {
 public LiveData<List<Score>> readAllScorsForUser(long userId) {
     return dao.selectByPlayerId(userId);
 }
-//TODO define m
+
+public LiveData<List<UserScore>> readAllUserScores() {
+    return dao.selectUserScores();
+}
 }
