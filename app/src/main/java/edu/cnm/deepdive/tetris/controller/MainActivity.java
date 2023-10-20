@@ -30,7 +30,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.tetris.R;
 import edu.cnm.deepdive.tetris.viewmodel.LoginViewModel;
-import edu.cnm.deepdive.tetris.viewmodel.PermissionsViewModel;
 import edu.cnm.deepdive.tetris.viewmodel.PreferencesViewModel;
 
 /**
@@ -48,11 +47,9 @@ import edu.cnm.deepdive.tetris.viewmodel.PreferencesViewModel;
  * <li><p>key events in the permissions request flow.</p></li></ul>
  */
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity implements
-    PermissionsExplanationFragment.OnAcknowledgeListener {
+public class MainActivity extends AppCompatActivity {
 
   private LoginViewModel loginViewModel;
-  private PermissionsViewModel permissionsViewModel;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -90,19 +87,6 @@ public class MainActivity extends AppCompatActivity implements
     return true;
   }
 
-  @Override
-  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-      @NonNull int[] grantResults) {
-    if (!permissionsViewModel.handlePermissionsRequestResult(requestCode, permissions,
-        grantResults)) {
-      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-  }
-
-  @Override
-  public void onAcknowledge(String[] permissions) {
-    permissionsViewModel.requestPermissions(this, permissions);
-  }
 
   private void setUpNavigation(){
     AppBarConfiguration config = new AppBarConfiguration.Builder(R.id.game_fragment, R.id.scores_fragment).build();
@@ -115,11 +99,11 @@ public class MainActivity extends AppCompatActivity implements
     loginViewModel
         .getAccount()
         .observe(this, this::handleAccount);
-    permissionsViewModel = new ViewModelProvider(this).get(PermissionsViewModel.class);
+
     NavHostFragment navHostFragment =
         (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
     //noinspection DataFlowIssue
-    permissionsViewModel.startPermissionsCheck(this, navHostFragment.getNavController());
+
   }
 
   private void handleAccount(GoogleSignInAccount account) {

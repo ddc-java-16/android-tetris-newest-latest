@@ -1,9 +1,13 @@
 package edu.cnm.deepdive.tetris.model;
 
+
 import edu.cnm.deepdive.tetris.model.Block.ShapeType;
 
 public class Field {
 
+  private static final double TIMING_OFFSET = 0.8;
+  private static final double TIMING_LEVEL_MULTIPLIER = 0.007;
+  private static final int[] removalScores = {0,1,3,5,8};
 
   private final int bufferHeight;
   private final int height;
@@ -14,6 +18,11 @@ public class Field {
   private Block ghostBlock;
 
   private int rowsRemoved;
+  private int levelRowsRemoved;
+  private int level;
+  private int score;
+  private double secondsPerTick;
+
   private boolean gameOver;
   private final ShapeType[][] contents;
 
@@ -25,28 +34,35 @@ public class Field {
     contents = new ShapeType[height][width];
   }
 
-public void start() throws GameOverException {
-    if (gameOver) {
-      throw new GameOverException();
-      };
+public void start() {
+      if (level>0) {
+
+    }
+    level = 1;
+      computeTiming();
 
     addBlock();
 }
+  private void checkForGameOver() throws GameOverException {
+    if (gameOver) {
+      throw new GameOverException();
+    }
+  }
 
 public boolean rotateLeft() throws GameOverException {
-  if (gameOver) {
-    throw new GameOverException();
-  };
+  checkForGameOver();
+  ;
   boolean rotated = currentBlock.rotate((false));
   if(rotated) {
     createGhost();;
   }
   return rotated;
 }
-public boolean moveLeft() throws GameOverException {
-  if (gameOver) {
-    throw new GameOverException();
-  };
+
+
+  public boolean moveLeft() throws GameOverException {
+    checkForGameOver();
+    ;
   boolean moved = currentBlock.move(0, -1);
   if(moved) {
     createGhost();
@@ -56,9 +72,8 @@ public boolean moveLeft() throws GameOverException {
 
 }
 public boolean moveRight() throws GameOverException {
-  if (gameOver) {
-    throw new GameOverException();
-  };
+  checkForGameOver();
+  ;
   boolean moved = currentBlock.move(0, 1);
   if(moved) {
     createGhost();
@@ -67,9 +82,8 @@ public boolean moveRight() throws GameOverException {
 
   }
 public boolean rotateRight() throws GameOverException {
-  if (gameOver) {
-    throw new GameOverException();
-  };
+  checkForGameOver();
+  ;
   boolean rotated = currentBlock.rotate((true));
   if(rotated) {
     createGhost();
@@ -78,9 +92,8 @@ public boolean rotateRight() throws GameOverException {
 
 }
   public boolean moveDown() {
-    if (gameOver) {
-      throw new GameOverException();
-    };
+    checkForGameOver();
+    ;
     boolean moved = currentBlock.move(1, 0);
     if (!moved) {
       currentBlock.freeze();
@@ -149,19 +162,52 @@ public boolean rotateRight() throws GameOverException {
     return rowsRemoved;
   }
 
+  public int getLevelRowsRemoved() {
+    return levelRowsRemoved;
+  }
+
+  public int getLevel() {
+    return level;
+  }
+
+  public int getScore() {
+    return score;
+  }
+
+  public double getSecondsPerTick() {
+    return secondsPerTick;
+  }
+
   public boolean isGameOver() {
     return gameOver;
   }
 
   private void update(int rowIndex) {
     for (; rowIndex >= 0 && !isEmpty(rowIndex); rowIndex--) {
-      while (isFull(rowIndex)) {
-        removeRow(rowIndex);
-        rowsRemoved++;
-      }
+      int rowsRemoved = removeRows(rowIndex);
+      updateLevel(rowsRemoved);
+      score += removalScores[rowsRemoved];
+      };
 
     }
 
+  private int removeRows(int rowIndex) {
+    int rowsRemoved = 0;
+    while (isFull(rowIndex)) {
+      removeRow(rowIndex);
+      rowsRemoved++;
+    }
+    return rowsRemoved;
+  }
+
+  private void updateLevel(int rowsRemoved) {
+    levelRowsRemoved+= rowsRemoved;
+    this.rowsRemoved += rowsRemoved;
+    if(levelRowsRemoved>= 5*level) {
+      level++;
+      computeTiming();
+      levelRowsRemoved = 0;
+    }
   }
 
 
@@ -201,9 +247,12 @@ public boolean rotateRight() throws GameOverException {
   private void createGhost() {
     Block ghost = currentBlock.clone();
     while(ghost.move(1,0)) {
-      //no body code require; movement is done entirely in the condition...
+
     }
     ghostBlock = ghost;
+  }
+  private void computeTiming() {
+    secondsPerTick = Math.pow(TIMING_OFFSET - (level - 1) * TIMING_LEVEL_MULTIPLIER, level - 1);
   }
 
   public static class GameOverException extends IllegalStateException {
@@ -225,4 +274,5 @@ public boolean rotateRight() throws GameOverException {
     }
   }
 }
+
 

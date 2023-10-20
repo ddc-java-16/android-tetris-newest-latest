@@ -34,7 +34,6 @@ public class Score {
 
   @ColumnInfo(name = "player_id", index = true)
   private long playerId;
-
   public long getId() {
     return id;
   }
