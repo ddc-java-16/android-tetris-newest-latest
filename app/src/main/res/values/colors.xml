@@ -32,4 +32,5 @@
   <color name="t_shape">#9C27B0</color>
   <color name="black_outline">#000000</color>
   <color name="null_shape">#00000000</color>
+  <color name="null_outline">#40000000</color>
 </resources>

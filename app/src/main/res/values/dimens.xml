@@ -20,4 +20,5 @@
   <dimen name="brick_size">100dp</dimen>
   <dimen name="brick_stroke_width">1dp</dimen>
   <dimen name="button_size">36dp</dimen>
+  <dimen name="brick_outline_width">1dp</dimen>
 </resources>

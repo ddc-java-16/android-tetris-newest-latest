@@ -4,6 +4,7 @@ package edu.cnm.deepdive.tetris.model;
 import edu.cnm.deepdive.tetris.model.Block.ShapeType;
 
 public class Field {
+  private static final int ROW_THRESHOLD_LEVEL_MULTIPLIER = 5;
 
   private static final double TIMING_OFFSET = 0.8;
   private static final double TIMING_LEVEL_MULTIPLIER = 0.007;
@@ -35,14 +36,19 @@ public class Field {
   }
 
 public void start() {
-      if (level>0) {
-
+      if (isGameStarted()) {
+throw new GameStartedException();
     }
     level = 1;
       computeTiming();
 
     addBlock();
 }
+
+  public boolean isGameStarted() {
+    return level > 0;
+  }
+
   private void checkForGameOver() throws GameOverException {
     if (gameOver) {
       throw new GameOverException();
@@ -93,7 +99,6 @@ public boolean rotateRight() throws GameOverException {
 }
   public boolean moveDown() {
     checkForGameOver();
-    ;
     boolean moved = currentBlock.move(1, 0);
     if (!moved) {
       currentBlock.freeze();
@@ -185,6 +190,7 @@ public boolean rotateRight() throws GameOverException {
   private void update(int rowIndex) {
     for (; rowIndex >= 0 && !isEmpty(rowIndex); rowIndex--) {
       int rowsRemoved = removeRows(rowIndex);
+      this.rowsRemoved += rowsRemoved;
       updateLevel(rowsRemoved);
       score += removalScores[rowsRemoved];
       };
@@ -203,7 +209,7 @@ public boolean rotateRight() throws GameOverException {
   private void updateLevel(int rowsRemoved) {
     levelRowsRemoved+= rowsRemoved;
     this.rowsRemoved += rowsRemoved;
-    if(levelRowsRemoved>= 5*level) {
+    if(levelRowsRemoved>= ROW_THRESHOLD_LEVEL_MULTIPLIER * level) {
       level++;
       computeTiming();
       levelRowsRemoved = 0;
@@ -254,11 +260,33 @@ public boolean rotateRight() throws GameOverException {
   private void computeTiming() {
     secondsPerTick = Math.pow(TIMING_OFFSET - (level - 1) * TIMING_LEVEL_MULTIPLIER, level - 1);
   }
+public static  class GameStartedException extends IllegalStateException {
 
+  public static final String DEFAULT_STARTED_MESSAGE = "Game has not started";
+
+  public GameStartedException() {
+    super(DEFAULT_STARTED_MESSAGE);
+  }
+
+  public GameStartedException(String s) {
+    super(s);
+  }
+
+  public GameStartedException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  public GameStartedException(Throwable cause) {
+    super(cause);
+  }
+}
   public static class GameOverException extends IllegalStateException {
 
+
+    private static final String DEFAULT_MESSAGE = "No movement allowed after game is over";
+
     public GameOverException() {
-      super();
+      this(DEFAULT_MESSAGE);
     }
 
     public GameOverException(String message) {

@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.tetris.service;
 
+import static kotlinx.coroutines.flow.FlowKt.observeOn;
+
 import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,6 +15,8 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.functions.Supplier;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.rxjava3.subjects.Subject;
 import java.security.SecureRandom;
 import java.util.Optional;
 import java.util.Random;
@@ -23,70 +27,118 @@ import javax.inject.Singleton;
 
 @Singleton
 public class PlayingFieldRepository {
+
+  private static final int MILLISECONDS_PER_SECOND = 1000;
+  private static final int DROP_ROWS_PER_TICK = 20;
   private final Random rng;
   private final MutableLiveData<Field> playingField;
   private final MutableLiveData<Dealer> dealer;
-  private final Scheduler scheduler;
+  private final Scheduler moveScheduler;
+  private final Scheduler tickScheduler;
+  private final Scheduler dropScheduler;
+
+  private Subject<Boolean> ticker;
+
   @Inject
-    PlayingFieldRepository (@ApplicationContext Context context, Random rng) {
- this.rng = rng;
+  PlayingFieldRepository(@ApplicationContext Context context, Random rng) {
+    this.rng = rng;
     playingField = new MutableLiveData<>();
-    dealer= new MutableLiveData<>();
-    scheduler = Schedulers.single();
+    dealer = new MutableLiveData<>();
+    moveScheduler = Schedulers.single();
+    dropScheduler = Schedulers.single();
+    tickScheduler = Schedulers.single();
   }
+
   public Completable create(int height, int width, int bufferSize, int queueSize) {
     return Single.fromSupplier(() -> new Dealer(queueSize, rng))
         .flatMap((dealer) ->
             Single.fromSupplier(() -> new Field(height, width, bufferSize, dealer))
-                .doAfterSuccess((field) -> {
-                  field.start();
-                  this.dealer.postValue(dealer);
-                })
+                .doAfterSuccess((field) -> this.dealer.postValue(dealer))
         )
         .doAfterSuccess((field) -> playingField.postValue(field))
         .ignoreElement()
-        .subscribeOn(scheduler);
+        .subscribeOn(moveScheduler);
   }
+
+  public Observable<Boolean> run() {
+    clearTicker();
+    Field field = playingField.getValue();
+    if (!field.isGameStarted()) {
+      field.start();
+      playingField.postValue(field);
+      dealer.postValue(dealer.getValue());
+    }
+      ticker = BehaviorSubject.createDefault(Boolean.TRUE);
+    return ticker
+        .filter(Boolean.TRUE::equals)
+        .flatMap((running) -> Observable.just(running).delay(Math.round(field.getSecondsPerTick() * MILLISECONDS_PER_SECOND),
+            TimeUnit.MILLISECONDS, tickScheduler))
+        .observeOn(moveScheduler)
+        .map((ignored) -> tick());
+
+  }
+
+  private void clearTicker() {
+    if (ticker != null && ticker.hasComplete()) {
+      ticker.onComplete();
+    }
+    ticker = null;
+  }
+
+  public void stop() {
+    clearTicker();
+
+  }
+
   public Single<Boolean> moveLeft() {
     return move(() -> playingField.getValue().moveLeft());
   }
+
   public Single<Boolean> moveRight() {
     return move(() -> playingField.getValue().moveRight());
   }
+
   public Single<Boolean> rotateRight() {
     return move(() -> playingField.getValue().rotateRight());
   }
+
   public Single<Boolean> rotateLeft() {
     return move(() -> playingField.getValue().rotateLeft());
   }
+
   public Single<Boolean> moveDown() {
     return move(() -> playingField.getValue().moveDown());
   }
-  public Completable drop(long interval) {
+
+  public Completable drop() {
     Field field = playingField.getValue();
     return Completable.fromObservable(
-        Observable.interval(0, interval, TimeUnit.MILLISECONDS)
+        Observable.interval(0,
+                Math.round(field.getSecondsPerTick() * MILLISECONDS_PER_SECOND / DROP_ROWS_PER_TICK),
+                TimeUnit.MILLISECONDS, dropScheduler)
+            .observeOn(moveScheduler)
             .takeWhile((ignored) -> {
-              boolean moved = field.moveDown();
-              if(moved) {
-                playingField.postValue(field);
+              if (field.moveDown()) {
+                return true;
+              } else {
+                dealer.postValue(dealer.getValue());
+                return false;
               }
-              return moved;
-
-            })).subscribeOn(scheduler);
+            })
+            .doAfterNext((ignored) -> playingField.postValue(field)));
 
 
   }
-
 
 
   public LiveData<Field> getPlayingField() {
     return playingField;
-}
+  }
 
   public LiveData<Dealer> getDealer() {
     return dealer;
   }
+
   private Single<Boolean> move(Supplier<Boolean> supplier) {
     Field field = playingField.getValue();
     return Single.fromSupplier(supplier)
@@ -94,6 +146,23 @@ public class PlayingFieldRepository {
           if (success) {
             playingField.postValue(field);
           }
-        }).subscribeOn(scheduler);  }
+        }).subscribeOn(moveScheduler);
+  }
 
+  private boolean tick() {
+    Field field = playingField.getValue();
+    boolean moved = field.moveDown();
+    if (!moved) {
+      dealer.postValue(dealer.getValue());
+    }
+    playingField.postValue(field);
+    boolean stillRunning = moved || !field.isGameOver();
+    if (stillRunning) {
+      ticker.onNext(Boolean.TRUE);
+    } else {
+      clearTicker();
+    }
+
+    return stillRunning;
+  }
 }
