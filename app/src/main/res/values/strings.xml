@@ -47,11 +47,16 @@
   <string name="scores_fragment_label">scores</string>
   <string name="game_label">game\n</string>
   <string name="move_left">Move Left</string>
-  <string name="current_level">Current Level</string>
-  <string name="current_rows_removed">Current Rows Removed</string>
+  <string name="current_level">Level</string>
+  <string name="current_rows_removed">Current Rows</string>
   <string name="final_score_format">Score: %,d</string>
   <string name="game_over">Game Over!</string>
   <string name="high_scores">High Scores</string>
   <string name="score">Score</string>
+  <string name="display_name_header">player</string>
+  <string name="score_header">score</string>
+  <string name="rows_removed_header">Rows</string>
+  <string name="created_header">date</string>
+  <string name="ranking_header">#</string>
 
 </resources>

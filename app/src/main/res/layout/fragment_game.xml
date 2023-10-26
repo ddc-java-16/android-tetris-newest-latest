@@ -34,6 +34,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="@string/current_level"
+      android:background="@null"
       android:inputType="none"
       android:focusable="false"
       tools:text="5"/>
@@ -57,6 +58,7 @@
       android:id="@+id/rows_removed"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="@null"
       android:inputType="none"
       android:hint="@string/current_rows_removed"
       android:editable="false"
@@ -81,6 +83,7 @@
       android:layout_height="wrap_content"
       app:layout_constraintTop_toTopOf="@id/level_layout"
       android:hint="@string/score"
+      android:background="@null"
       android:editable="false"
       android:focusable="false"
       tools:text="10000"/>
@@ -108,10 +111,12 @@
     android:orientation="vertical"
     android:gravity="center"
     android:visibility="gone"
+    android:background="@color/design_default_color_background"
+    android:elevation="24dp"
     app:layout_constraintTop_toTopOf="@id/playing_field"
     app:layout_constraintStart_toStartOf="@id/playing_field"
-    app:layout_constraintEnd_toEndOf="@id/playing_field"
-    app:layout_constraintBottom_toBottomOf="@id/playing_field">
+    app:layout_constraintEnd_toStartOf="@id/guideline"
+    app:layout_constraintBottom_toTopOf="@id/drop">
 
     <TextView
       android:id="@+id/game_over"

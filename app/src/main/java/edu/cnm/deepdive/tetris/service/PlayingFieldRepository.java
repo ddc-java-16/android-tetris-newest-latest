@@ -106,11 +106,11 @@ public class PlayingFieldRepository {
     return move(() -> playingField.getValue().rotateLeft());
   }
 
-  public Single<Boolean> moveDown() {
-    return move(() -> playingField.getValue().moveDown());
+  public Single<Boolean> moveDown(boolean freezeOnFailure) {
+    return move(() -> playingField.getValue().moveDown(freezeOnFailure));
   }
 
-  public Completable drop() {
+  public Completable drop(boolean hard) {
     Field field = playingField.getValue();
     return Completable.fromObservable(
         Observable.interval(0,
@@ -118,7 +118,7 @@ public class PlayingFieldRepository {
                 TimeUnit.MILLISECONDS, dropScheduler)
             .observeOn(moveScheduler)
             .takeWhile((ignored) -> {
-              if (field.moveDown()) {
+              if (field.moveDown(hard)) {
                 return true;
               } else {
                 dealer.postValue(dealer.getValue());
@@ -151,7 +151,7 @@ public class PlayingFieldRepository {
 
   private boolean tick() {
     Field field = playingField.getValue();
-    boolean moved = field.moveDown();
+    boolean moved = field.moveDown(true);
     if (!moved) {
       dealer.postValue(dealer.getValue());
     }

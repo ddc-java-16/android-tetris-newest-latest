@@ -97,10 +97,10 @@ public boolean rotateRight() throws GameOverException {
   return rotated;
 
 }
-  public boolean moveDown() {
+  public boolean moveDown(boolean freezeOnFailure) {
     checkForGameOver();
     boolean moved = currentBlock.move(1, 0);
-    if (!moved) {
+    if (!moved && freezeOnFailure) {
       currentBlock.freeze();
       update(currentBlock.getTopRow() + currentBlock.getLastOccupiedRow());
       if (currentBlock.getTopRow() + currentBlock.getLastOccupiedRow() < bufferHeight) {
