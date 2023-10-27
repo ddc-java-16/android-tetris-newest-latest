@@ -33,4 +33,6 @@
   <color name="black_outline">#000000</color>
   <color name="null_shape">#00000000</color>
   <color name="null_outline">#40000000</color>
+  <color name="odd_row_background">#20000000</color>
+  <color name="even_row_background">@android:color/transparent</color>
 </resources>

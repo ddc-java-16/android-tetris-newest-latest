@@ -1,6 +1,9 @@
 package edu.cnm.deepdive.tetris.controller;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -22,6 +25,7 @@ import edu.cnm.deepdive.tetris.viewmodel.PlayingFieldViewModel;
 import edu.cnm.deepdive.tetris.viewmodel.ScoreViewModel;
 import edu.cnm.deepdive.tetris.viewmodel.UserViewModel;
 import java.time.Instant;
+import org.jetbrains.annotations.NotNull;
 
 public class GameFragment extends Fragment {
 
@@ -44,6 +48,7 @@ private User user;
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setHasOptionsMenu(true);
 
   }
 
@@ -60,6 +65,31 @@ private User user;
       @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     setupViewmodels();
+  }
+
+  @Override
+  public void onCreateOptionsMenu(@NonNull Menu menu,
+      @NonNull MenuInflater inflater) {
+    super.onCreateOptionsMenu(menu, inflater);
+    inflater.inflate(R.menu.game_options, menu);
+  }
+
+
+  // FIXME: 10/27/23 FIXME FIXME
+  @Override
+  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    boolean handled = true;
+    int id = item.getItemId();
+    if (id == R.id.play) {
+      playingFieldViewModel.run();;
+    } else if (id == R.id.pause){
+      playingFieldViewModel.stop();
+    } else if(id == R.id.restart) {
+      playingFieldViewModel.create();
+    }else {
+      handled = super.onOptionsItemSelected(item);
+    }
+    return handled;
   }
 
   private void setupViewmodels() {
@@ -140,8 +170,6 @@ binding.gameOverLayout.setVisibility(playingField.isGameOver() ? View.VISIBLE : 
     binding.rotateRight.setOnClickListener((v) -> playingFieldViewModel.rotateRight());
     binding.rotateLeft.setOnClickListener((v) -> playingFieldViewModel.rotateLeft());
     binding.drop.setOnClickListener((v) -> playingFieldViewModel.drop());
-    binding.run.setOnClickListener((v) -> playingFieldViewModel.run());
-    binding.stop.setOnClickListener((v) -> playingFieldViewModel.stop());
     binding.showScores.setOnClickListener((v) -> Navigation.findNavController(binding.getRoot())
         .navigate(GameFragmentDirections.navigateToScores(score)));
   }

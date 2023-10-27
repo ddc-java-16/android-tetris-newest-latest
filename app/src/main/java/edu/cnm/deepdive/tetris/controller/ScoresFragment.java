@@ -9,13 +9,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import edu.cnm.deepdive.tetris.R;
+import edu.cnm.deepdive.tetris.adapter.UserScoresAdapter;
 import edu.cnm.deepdive.tetris.databinding.FragmentScoresBinding;
+import edu.cnm.deepdive.tetris.viewmodel.ScoreViewModel;
 import org.jetbrains.annotations.NotNull;
 
 
 public class ScoresFragment extends Fragment {
+  private ScoreViewModel viewmodel;
+
 
  private FragmentScoresBinding binding;
   @Override
@@ -26,11 +31,9 @@ public class ScoresFragment extends Fragment {
 
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentScoresBinding.inflate(inflater, container, false);
-
-    binding.dummyText.setText(String.valueOf(ScoresFragmentArgs.fromBundle(getArguments()).getScore()));
     return binding.getRoot();
   }
 
@@ -38,9 +41,13 @@ public class ScoresFragment extends Fragment {
   public void onViewCreated(@NonNull View view,
       @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-     // TODO Connect to veiwmodels and add observers
+    new ViewModelProvider(requireActivity())
+        .get(ScoreViewModel.class)
+        .getAllScores()
+        .observe(getViewLifecycleOwner(), (scores) ->
+            binding.scores.setAdapter(new UserScoresAdapter(requireContext(), scores)));
+    ActionBar actionbar = ((AppCompatActivity)requireActivity()).getSupportActionBar();
     //noinspection DataFlowIssue
-    ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
     actionbar.setDisplayHomeAsUpEnabled(true);
     actionbar.setDisplayShowHomeEnabled(true);
   }

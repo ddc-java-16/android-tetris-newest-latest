@@ -58,5 +58,9 @@
   <string name="rows_removed_header">Rows</string>
   <string name="created_header">date</string>
   <string name="ranking_header">#</string>
+  <string name="run">Run</string>
+  <string name="pause">pause</string>
+  <string name="restart">restart</string>
+  <string name="new_game">New Game</string>
 
 </resources>
