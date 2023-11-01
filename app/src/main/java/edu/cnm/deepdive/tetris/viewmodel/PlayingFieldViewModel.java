@@ -61,6 +61,9 @@ inProgress = Transformations.map(playingFieldRepository.getPlayingField(), (fiel
   public LiveData<Dealer> getDealer() {
     return playingFieldRepository.getDealer();
   }
+  public LiveData<Boolean> getRunning(){
+    return Transformations.distinctUntilChanged(playingFieldRepository.getRunning());
+  }
 
   public LiveData<Boolean> getMoveSuccess() {
     return moveSuccess;
@@ -106,6 +109,13 @@ public void stop() {
   }
   public void drop() {
 execute(playingFieldRepository.drop(false));
+  }
+
+
+  @Override
+  public void onPause(@NotNull LifecycleOwner owner) {
+    DefaultLifecycleObserver.super.onPause(owner);
+    stop();
   }
 
   @Override

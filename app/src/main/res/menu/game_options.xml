@@ -3,6 +3,12 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+
+  <item
+    android:id="@+id/restart"
+    android:title="@string/new_game"
+    android:icon="@drawable/restart"
+    app:showAsAction="always"/>
   <item
     android:id="@+id/play"
     android:title="@string/run"
@@ -15,10 +21,6 @@
     android:icon="@drawable/pause"
     app:showAsAction="always"/>
 
-  <item
-    android:id="@+id/restart"
-    android:title="@string/new_game"
-    android:icon="@drawable/restart"
-    app:showAsAction="always"/>
+
 
 </menu>

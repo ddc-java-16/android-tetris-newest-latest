@@ -41,6 +41,7 @@ private Boolean inProgress;
 private int level;
 private int rowsRemoved;
 private User user;
+private boolean running;
 
   public GameFragment() {
   }
@@ -74,6 +75,12 @@ private User user;
     inflater.inflate(R.menu.game_options, menu);
   }
 
+  @Override
+  public void onPrepareOptionsMenu(@NonNull Menu menu) {
+    super.onPrepareOptionsMenu(menu);
+    menu.findItem(R.id.play).setVisible(!running);
+    menu.findItem(R.id.pause).setVisible(running);
+  }
 
   // FIXME: 10/27/23 FIXME FIXME
   @Override
@@ -117,6 +124,7 @@ private User user;
   private void setUpPlayingFieldViewModel(FragmentActivity activity, LifecycleOwner owner) {
     playingFieldViewModel =  new ViewModelProvider(activity)
         .get(PlayingFieldViewModel.class);
+    getLifecycle().addObserver(playingFieldViewModel);
     playingFieldViewModel.getPlayingField()
         .observe(owner, this::handlePlayingField);
     playingFieldViewModel
@@ -125,6 +133,20 @@ private User user;
     playingFieldViewModel
         .getInProgress()
         .observe(owner, this::handleInProgress);
+    playingFieldViewModel.getRunning().observe(owner, (running) ->
+      handleRunning(running)
+
+    );
+  }
+
+  private void handleRunning(Boolean running) {
+    this.running = running;
+    requireActivity().invalidateOptionsMenu();
+    binding.moveLeft.setEnabled(running);
+    binding.moveRight.setEnabled(running);
+    binding.rotateRight.setEnabled(running);
+    binding.rotateLeft.setEnabled(running);
+    binding.drop.setEnabled(running);
   }
 
   private void handleInProgress(Boolean inProgress) {
